@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Generator</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <span class="hamburger-btn material-symbols-rounded">menu</span>
+            <a href="{{ url_for('home') }}" class="logo">
+                <img src="../static/assests/images/logo.jpeg" alt="logo">
+                <h2>Vocab AI</h2>
+            </a>
+            <ul class="links">
+                <span class="close-btn material-symbols-rounded">close</span>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+            </ul>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="login-btn">LOG OUT</a>
+            {% else %}
+                <button class="login-btn" id="show-login">LOG IN</button>
+            {% endif %}
+        </nav>
+    </header>
+
+    <h3 style="color: rgb(255, 255, 255); font-style: italic; text-align: center; font-size: 50px; padding-top: 15px;">
+        Question Generator</h3>
+
+    <!-- Content Wrapper for Inputs and Generated Content -->
+    <div class="content-wrapper">
+        <div class="input-box">
+            <textarea id="user-content" placeholder="Enter content here..."></textarea>
+        </div>
+
+        <div class="split-container">
+            <div class="left-side">
+                <button id="generate-flashcards">Generate Flashcards</button>
+                <div id="flashcards-container" class="flashcards-container">
+                    <!-- Flashcards will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="right-side">
+                <button id="generate-questions">Generate Questions</button>
+                <div id="questions-container">
+                    <!-- Questions will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="main-content">
+            <textarea id="contentInput" placeholder="Enter content here..."></textarea>
+            <button id="generateQuestionsBtn">Generate Questions</button>
+            <div id="questionsContainer"></div>
+            <div id="results"></div>
+            <div id="actionButtons" style="display: none;">
+                <button id="generateMoreQuestionsBtn">Generate More Questions</button>
+                <button id="checkAnswersBtn">Check Answers</button>
+                <button id="closeBtn">Close</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login and Signup Popup Forms -->
+    <div class="form-popup">
+        <span class="close-btn material-symbols-rounded">close</span>
+
+        <!-- Login Form -->
+        <div class="form-box login">
+            <div class="form-details">
+                <h2>Welcome Back</h2>
+                <p>Please log in using your personal information to stay connected with us.</p>
+            </div>
+            <div class="form-content">
+                <h2>LOGIN</h2>
+                <form action="{{ url_for('login') }}" method="POST">
+                    <div class="input-field">
+                        <input type="email" name="email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" required>
+                        <label>Password</label>
+                    </div>
+                    <a href="#" class="forgot-pass-link">Forgot password?</a>
+                    <button type="submit">Log In</button>
+                </form>
+                <div class="bottom-link">
+                    Don't have an account?
+                    <a href="#" id="signup-link">Signup</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="form-box signup">
+            <div class="form-details">
+                <h2>Create Account</h2>
+                <p>Please sign up using your personal information.</p>
+            </div>
+            <div class="form-content">
+                <h2>SIGNUP</h2>
+                <form action="{{ url_for('signup') }}" method="POST">
+                    <div class="input-field">
+                        <input type="email" name="email" required>
+                        <label>Enter your email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" required>
+                        <label>Create password</label>
+                    </div>
+                    <div class="policy-text">
+                        <input type="checkbox" id="policy" required>
+                        <label for="policy">
+                            I agree to the
+                            <a href="#" class="option">Terms & Conditions</a>
+                        </label>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <div class="bottom-link">
+                    Already have an account?
+                    <a href="#" id="login-link">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/script.js" defer></script>
+    <script src="../static/js/script1.js" defer></script>
+</body>
+
+</html>

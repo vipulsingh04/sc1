@@ -2,20 +2,26 @@ from flask import Flask, render_template, redirect, url_for, request, flash, jso
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user, UserMixin
+from dotenv import load_dotenv
 import os
 import google.generativeai as genai
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 
 # Configuration for Flask app
-app.config['SECRET_KEY'] = 'your_secret_key'  # Replace with your secret key
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your_default_secret_key')  # Use default if not set
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # To suppress SQLAlchemy warning
 
 # Initialize extensions
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'  # Flash message category for login required
 
 # User model for the database
 class User(UserMixin, db.Model):
@@ -31,6 +37,8 @@ def load_user(user_id):
 # Route for the signup page
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
@@ -53,6 +61,8 @@ def signup():
 # Route for the login page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -69,9 +79,8 @@ def login():
 # Route for the home page
 @app.route('/')
 @app.route('/home')
-@login_required
 def home():
-    return render_template('index.html', username=current_user.username)
+    return render_template('index.html', is_authenticated=current_user.is_authenticated)
 
 # Route for logout
 @app.route('/logout')
@@ -79,13 +88,15 @@ def home():
 def logout():
     logout_user()
     flash('You have been logged out.', 'info')
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
-# Set the API key in the environment
-os.environ['GOOGLE_API_KEY'] = "AIzaSyADS0V9vn4ya99NsM_O0WZ6gP6QUH1EEX4"
+# Get the API key from environment variables
+api_key = os.getenv('GOOGLE_API_KEY')
+if not api_key:
+    raise ValueError("No GOOGLE_API_KEY found in environment variables")
 
 # Configure the genai library with the API key
-genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
+genai.configure(api_key=api_key)
 model = genai.GenerativeModel("gemini-1.5-pro")
 
 # Route for the question page
@@ -94,11 +105,18 @@ model = genai.GenerativeModel("gemini-1.5-pro")
 def question_page():
     return render_template('ques.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 # Route to generate a question
 @app.route('/generate-question', methods=['POST'])
 @login_required
 def generate_question():
     content = request.json.get('content')
+    if not content:
+        return jsonify({"error": "Content is required to generate a question."}), 400
+
     try:
         response = model.generate_content(
             f"Generate a 1-line question from '{content}' whose answer should not be too long nor too short. "
@@ -119,6 +137,9 @@ def check_answer():
     user_answer = request.json.get('answer')
     content = request.json.get('content')
     question = request.json.get('question')
+
+    if not user_answer or not content or not question:
+        return jsonify({"error": "Answer, content, and question are required."}), 400
 
     try:
         response = model.generate_content(

@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const formPopup = document.querySelector(".form-popup");
     const hidePopupBtn = formPopup.querySelector(".close-btn");
     const signupLoginLinks = formPopup.querySelectorAll(".bottom-link a");
-    
+
     // Initialize typewriter effect
     const typewriterElement = document.getElementById('typewriter');
-    
+
     if (typewriterElement) {
         new Typewriter(typewriterElement, {
             loop: true,
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .deleteAll()
         .start();
     }
-    
+
     // Toggle navigation menu visibility
     hamburgerBtn.addEventListener("click", () => {
         navbarMenu.classList.toggle("show-menu");

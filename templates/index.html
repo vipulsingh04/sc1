@@ -7,41 +7,55 @@
     <title>Vocab AI</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
     <link rel="stylesheet" href="../static/css/style.css">
-    <!-- TypeJS CDN -->
+    <!-- Typewriter Effect CDN -->
     <script src="https://cdn.jsdelivr.net/npm/typewriter-effect@latest/dist/core.min.js"></script>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <span class="hamburger-btn material-symbols-rounded">menu</span>
-            <a href="{{ url_for('home') }}" class="logo">
-                <img src="../static/assests/images/logo.jpeg" alt="logo">
-                <h2>Vocab AI</h2>
-            </a>
-            <ul class="links">
-                <span class="close-btn material-symbols-rounded">close</span>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="#">Contact us</a></li>
-            </ul>
-            {% if current_user.is_authenticated %}
-                <a href="{{ url_for('logout') }}" class="login-btn">LOG OUT</a>
-            {% else %}
-                <button class="signup-btn" onclick="window.location.href = 'signup.html';">SIGN UP</button>
-            <button class="login-btn" onclick="window.location.href = 'login.html';">LOG IN</button>
-            {% endif %}
-        </nav>
-    </header>
-    <div class="blur-bg-overlay"></div>
-    
-    <div class="row">
-        <div class="col">
-            <h2 id="typewriter">"Innovation is like looking for pieces in a jigsaw puzzle.<br> You have to find a lot of pieces that don't match to find <br> the one or two pieces that match."</h2>
-            <a href="{{ url_for('question_page') }}" class="button" target="_self">Question Generator</a>
+    <div class="bg">
+        <!-- <video src="../static/assests/images/vid.mp4" autoplay muted loop class="home_video">   </video>      -->
+            <header>
+            <nav class="navbar">
+                <span class="hamburger-btn material-symbols-rounded">menu</span>
+                <a href="{{ url_for('home') }}" class="logo">
+                    <img src="../static/assests/images/logo.jpeg" alt="logo">
+                    <h2>Vocab AI</h2>
+                </a>
+                <ul class="links">
+                    <span class="close-btn material-symbols-rounded">close</span>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="#">Contact us</a></li>
+                </ul>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}" class="logout-btn">LOG OUT</a>
+                {% else %}
+                    <!-- Container for login and signup buttons -->
+                    <div class="auth-buttons">
+                        <a href="{{ url_for('signup') }}" class="signup-btn">SIGN UP</a>
+                        <a href="{{ url_for('login') }}" class="login-btn">LOG IN</a>
+                    </div>
+                {% endif %}
+            </nav>
+        </header>
+        <div class="video-background">
+            <video autoplay muted loop id="backgroundVideo">
+                <source src="../static/assests/images/vid.mp4" type="video/mp4">
+            </video>
         </div>
+    
+        <div class="blur-bg-overlay"></div>
+    
+        <div class="hero-section">
+            
+                <h2>Innovation is like looking for pieces in a jigsaw puzzle.<br> You have to find a lot of pieces that don't match to find <br> the one or two pieces that match.<br></h2>
+                <a href="{{ url_for('question_page') }}" class="herobutton" target="_self">Question Generator</a>
+            
+        </div>
+
+
     </div>
     
-
     <script src="../static/js/script.js" defer></script>
 </body>
 

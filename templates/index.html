@@ -27,7 +27,8 @@
             {% if current_user.is_authenticated %}
                 <a href="{{ url_for('logout') }}" class="login-btn">LOG OUT</a>
             {% else %}
-                <button class="login-btn" id="show-login">LOG IN</button>
+                <button class="signup-btn" onclick="window.location.href = 'signup.html';">SIGN UP</button>
+            <button class="login-btn" onclick="window.location.href = 'login.html';">LOG IN</button>
             {% endif %}
         </nav>
     </header>
@@ -40,102 +41,6 @@
         </div>
     </div>
     
-    <!-- Login and Signup Popup Forms -->
-    <div class="form-popup">
-        <span class="close-btn material-symbols-rounded">close</span>
-
-        <!-- Login Form -->
-        <div class="form-box login">
-            <div class="form-details">
-                <h2>Welcome Back</h2>
-                <p>Please log in using your personal information to stay connected with us.</p>
-            </div>
-            <div class="form-content">
-                <h2>LOGIN</h2>
-                <form action="{{ url_for('login') }}" method="POST">
-                    <div class="input-field">
-                        <input type="email" name="email" required>
-                        <label>Email</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" name="password" required>
-                        <label>Password</label>
-                    </div>
-                    <a href="#" class="forgot-pass-link">Forgot password?</a>
-                    <button type="submit">Log In</button>
-                </form>
-                <div class="bottom-link">
-                    Don't have an account?
-                    <a href="#" id="signup-link">Signup</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Signup Form -->
-        <div class="form-box signup">
-            <div class="form-details">
-                <h2>Create Account</h2>
-                <p>Please sign up using your personal information.</p>
-            </div>
-            <div class="form-content">
-                <h2>SIGNUP</h2>
-                <form action="{{ url_for('signup') }}" method="POST">
-                    <div class="input-field">
-                        <input type="email" name="email" required>
-                        <label>Enter your email</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" name="password" required>
-                        <label>Create password</label>
-                    </div>
-                    <div class="policy-text">
-                        <input type="checkbox" id="policy" required>
-                        <label for="policy">
-                            I agree to the
-                            <a href="#" class="option">Terms & Conditions</a>
-                        </label>
-                    </div>
-                    <button type="submit">Sign Up</button>
-                </form>
-                <div class="bottom-link">
-                    Already have an account?
-                    <a href="#" id="login-link">Login</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="center">
-        <div class="slides show">
-            <ul>
-                <li>
-                    <img src="../static/assests/images/img2.jpeg" alt="Image 2">
-                </li>
-                <li>
-                    <img src="../static/assests/images/img3.jpeg" alt="Image 3">
-                </li>
-                <li>
-                    <img src="../static/assests/images/img4.jpeg" alt="Image 4">
-                </li>
-            </ul>
-
-            <input id="slide1" type="radio" name="controls" checked="checked" />
-            <input id="slide2" type="radio" name="controls" />
-            <input id="slide3" type="radio" name="controls" />
-
-            <label for="slide1" class="nav-dot"></label>
-            <label for="slide2" class="nav-dot"></label>
-            <label for="slide3" class="nav-dot"></label>
-
-            <label for="slide1" class="left-arrow"> < </label>
-            <label for="slide2" class="left-arrow"> < </label>
-            <label for="slide3" class="left-arrow"> < </label>
-
-            <label for="slide1" class="right-arrow"> > </label>
-            <label for="slide2" class="right-arrow"> > </label>
-            <label for="slide3" class="right-arrow"> > </label>
-        </div>
-    </div>
 
     <script src="../static/js/script.js" defer></script>
 </body>

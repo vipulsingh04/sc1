@@ -3,7 +3,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: url('hero-bgg.jpg') no-repeat center center fixed;
+    background: url('../assests/images/hero-bgg.jpeg') no-repeat center center fixed;
     background-size: cover;
     color: #333;
 }
@@ -19,9 +19,13 @@ header {
 
 header nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Ensures left and right items are spaced out */
     align-items: center;
     padding: 0 20px;
+}
+
+header .nav-left {
+    flex: 1; /* Take up space on the left */
 }
 
 header .nav-left a,
@@ -38,28 +42,43 @@ header .nav-right a:hover {
     color: #ffc107;
 }
 
-header .nav-center {
-    flex: 1;
-    font-style: italic;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
+/* Removed header .nav-center since it's not used anymore */
+
+/* Page Backgrounds */
+.signup-page {
+    background: url('../assests/images/loginbg.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
 }
 
-.login-container,
-.signup-container {
+.login-page {
+    background: url('../assests/images/hero-bgg.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Form Styles */
+.login-container, .signup-container {
     max-width: 400px;
     margin: 50px auto;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for the form */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow for better elevation */
+    background-size: cover; /* Ensure background image covers the container */
 }
 
-.login-container h2,
-.signup-container h2 {
+.login-container {
+    background-image: url('../assests/images/loginbg.jpeg'); /* Specific login background */
+}
+
+.signup-container {
+    background-image: url('../assests/images/hero-bgg.jpeg'); /* Specific signup background */
+}
+
+.login-container h2, .signup-container h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-weight: bold;
     color: #007BFF;
 }
@@ -83,8 +102,8 @@ form button {
     border: none;
     padding: 12px;
     border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease;
 }
 
@@ -92,23 +111,13 @@ form button:hover {
     background: #0056b3;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+p a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: text-decoration 0.3s ease;
 }
 
-.container h1 {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.container p {
-    text-align: center;
-    font-size: 18px;
-    color: #fff;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+p a:hover {
+    text-decoration: underline;
 }

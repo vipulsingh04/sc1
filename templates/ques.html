@@ -10,31 +10,33 @@
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
-<body>
+<body class="ques"> 
     <header>
         <nav class="navbar">
             <span class="hamburger-btn material-symbols-rounded">menu</span>
             <a href="{{ url_for('home') }}" class="logo">
                 <img src="../static/assests/images/logo.jpeg" alt="logo">
-                <h2>Vocab AI</h2>
+                <h2 style="color: #080000;">Vocab AI</h2>
             </a>
-            <ul class="links">
-                <span class="close-btn material-symbols-rounded">close</span>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
+            <ul class="links1">
+                <li><a href="{{ url_for('home') }}" class="log-home">Home</a></li>
             </ul>
-            {% if current_user.is_authenticated %}
-                <a href="{{ url_for('logout') }}" class="login-btn">LOG OUT</a>
-            {% else %}
-                <button class="login-btn" id="show-login">LOG IN</button>
-            {% endif %}
+            <ul class="auth-links">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}" class="login-btn">LOG OUT</a>
+                {% else %}
+                    <button class="login-btn" id="show-login">LOG IN</button>
+                {% endif %}
+            </ul>
+            <span class="close-btn material-symbols-rounded">close</span>
         </nav>
     </header>
 
-    <h3 style="color: rgb(255, 255, 255); font-style: italic; text-align: center; font-size: 50px; padding-top: 15px;">
+    <h3 style="color: rgb(16, 4, 4); font-style: italic; text-align: center; font-size: 50px; padding-top: 15px;">
         Question Generator</h3>
 
     <!-- Content Wrapper for Inputs and Generated Content -->
-    <div class="content-wrapper">
+   <!-- <div class="content-wrapper">
         <div class="input-box">
             <textarea id="user-content" placeholder="Enter content here..."></textarea>
         </div>
@@ -43,23 +45,24 @@
             <div class="left-side">
                 <button id="generate-flashcards">Generate Flashcards</button>
                 <div id="flashcards-container" class="flashcards-container">
-                    <!-- Flashcards will be inserted here by JavaScript -->
+                    
                 </div>
             </div>
 
             <div class="right-side">
                 <button id="generate-questions">Generate Questions</button>
                 <div id="questions-container">
-                    <!-- Questions will be generated here -->
+                    
                 </div>
             </div>
         </div>
-    </div>
+    </div>  -->
 
     <main>
         <div class="main-content">
             <textarea id="contentInput" placeholder="Enter content here..."></textarea>
             <button id="generateQuestionsBtn">Generate Questions</button>
+            <button id="generateQuestionsBtn">Generate Flash Cards</button>
             <div id="questionsContainer"></div>
             <div id="results"></div>
             <div id="actionButtons" style="display: none;">

@@ -90,10 +90,7 @@ def logout():
     flash('You have been logged out.', 'info')
     return redirect(url_for('home'))
 
-# Get the API key from environment variables
-api_key = os.getenv('GOOGLE_API_KEY')
-if not api_key:
-    raise ValueError("No GOOGLE_API_KEY found in environment variables")
+
 
 # Configure the genai library with the API key
 genai.configure(api_key=api_key)

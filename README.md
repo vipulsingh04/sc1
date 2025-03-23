@@ -31,7 +31,7 @@ This is a Flask based web application that allows users to sign up, log in, and 
    cd your-repository
 
 2.**Create a virtual environment:**
-  
+
   ```bash
   python -m venv venv
  ```
@@ -76,23 +76,18 @@ python:
 Alternatively, if you're running the app for the first time, the database will be initialized automatically.
 
 2.**Run the Flask application:**
-
 ```bash
 flask run
 ```
-
 or
-
 ```bash
 python your_application.py
 ```
-
 ### Access the application:
 
 Open your web browser and go to http://127.0.0.1:5000.
 
-
-### Folder Structure
+### Folder Structure:
 
 /project-root
 │
@@ -110,9 +105,6 @@ Open your web browser and go to http://127.0.0.1:5000.
     ├── css/
     ├── js/
     └── images/
-
-### License
+    
+### License:
 This project is licensed under the MIT License. See the LICENSE file for more information.
-
-
-

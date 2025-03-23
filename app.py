@@ -82,7 +82,7 @@ def logout():
     return redirect(url_for('login'))
 
 # Set the API key in the environment
-os.environ['GOOGLE_API_KEY'] = "AIzaSyADS0V9vn4ya99NsM_O0WZ6gP6QUH1EEX4"
+os.environ['GOOGLE_API_KEY'] = ""
 
 # Configure the genai library with the API key
 genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
